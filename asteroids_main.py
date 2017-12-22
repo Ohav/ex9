@@ -45,8 +45,6 @@ class GameRunner:
             self._screen.draw_asteroid(asteroid, asteroid.location[0],
                                        asteroid.location[1])
 
-
-
     def run(self):
         self._do_loop()
         self._screen.start_screen()
@@ -58,7 +56,6 @@ class GameRunner:
         # Set the timer to go off again
         self._screen.update()
         self._screen.ontimer(self._do_loop,5)
-
 
     def _game_loop(self):
         '''
