@@ -13,3 +13,9 @@ class FlyingObject():
         new_coords_y = (self.speed[1] + self.location[1] - min_screen_size[0]) \
                        % y_change + min_screen_size[1]
         self.location = (new_coords_x, new_coords_y)
+
+    def get_location(self):
+        return self.location
+
+    def get_heading(self):
+        return self.heading

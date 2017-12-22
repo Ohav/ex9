@@ -40,6 +40,11 @@ class GameRunner:
             y_location = random.randint(self.screen_min_y, self.screen_max_y)
         return Asteroid((x_location, y_location))
 
+    def draw_asteroids(self):
+        for asteroid in self.asteroids:
+            self._screen.draw_asteroid(asteroid, asteroid.location[0],
+                                       asteroid.location[1])
+
 
 
     def run(self):
@@ -59,7 +64,10 @@ class GameRunner:
         '''
         Your code goes here!
         '''
-        self._screen.draw_ship(100, 100, 150)
+        ship_location = self.ship.get_location()
+        self._screen.draw_ship(ship_location[0], ship_location[1],
+                               self.ship.get_heading())
+        self.draw_asteroids()
 
         pass
 
