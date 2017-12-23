@@ -5,6 +5,8 @@ import random
 import sys
 
 DEFAULT_ASTEROIDS_NUM = 5
+MIN_SPEED = 1
+MAX_SPEED = 4
 
 class GameRunner:
 
@@ -38,12 +40,18 @@ class GameRunner:
         y_location = random.randint(self.screen_min_y, self.screen_max_y)
         while y_location == ship_location[1]:
             y_location = random.randint(self.screen_min_y, self.screen_max_y)
-        return Asteroid((x_location, y_location))
+        speed = (random.randint(MIN_SPEED, MAX_SPEED),
+                 random.randint(MIN_SPEED, MAX_SPEED))
+        return Asteroid((x_location, y_location), speed)
 
     def draw_asteroids(self):
         for asteroid in self.asteroids:
             self._screen.draw_asteroid(asteroid, asteroid.location[0],
                                        asteroid.location[1])
+
+    def destroy_asteroid(self, asteroid):
+        self._screen.unregister_asteroid(asteroid)
+        self.asteroids.remove(asteroid)
 
     def run(self):
         self._do_loop()
@@ -61,6 +69,11 @@ class GameRunner:
         '''
         Your code goes here!
         '''
+        for asteroid in self.asteroids:
+            if asteroid.has_intersection(self.ship):
+                self.ship.lose_life(self._screen)
+                self.destroy_asteroid(asteroid)
+
         ship_location = self.ship.get_location()
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self.ship.get_heading())
