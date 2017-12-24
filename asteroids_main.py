@@ -9,8 +9,8 @@ MIN_SPEED = 1
 MAX_SPEED = 4
 
 class GameRunner:
-    RIGHT_ANGLE = 7
-    LEFT_ANGLE = -7
+    LEFT_ANGLE = 7
+    RIGHT_ANGLE = -7
 
     def __init__(self, asteroids_amnt):
         self._screen = Screen()
@@ -95,9 +95,6 @@ class GameRunner:
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self.ship.get_heading())
         self.draw_asteroids()
-
-
-        pass
 
 def main(amnt):
     runner = GameRunner(amnt)

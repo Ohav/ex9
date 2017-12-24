@@ -13,9 +13,10 @@ class Asteroid(FlyingObject):
         FlyingObject.__init__(self, location, speed)
 
         self.size = max(min(size, MAX_SIZE), MIN_SIZE)
+        self._radius = SIZE_COEFFICIENT * self.size + NORMALIZER
 
     def get_radius(self):
-        return SIZE_COEFFICIENT * self.size + NORMALIZER
+        return self._radius
 
     def has_intersection(self, obj):
         obj_location = obj.get_location()
