@@ -2,15 +2,15 @@ from flying_object import FlyingObject
 
 MIN_SIZE = 1
 MAX_SIZE = 3
-DEF_HEADING = 0
 SIZE_COEFFICIENT = 10
 NORMALIZER = -5
+X_COORD = 0
+Y_COORD = 1
 
 
 class Asteroid(FlyingObject):
-
-    def __init__(self, location, speed, heading=DEF_HEADING, size=MAX_SIZE):
-        FlyingObject.__init__(location, speed, heading)
+    def __init__(self, location, speed, size=MAX_SIZE):
+        FlyingObject.__init__(self, location, speed)
 
         self.size = max(min(size, MAX_SIZE), MIN_SIZE)
 
@@ -20,9 +20,9 @@ class Asteroid(FlyingObject):
     def has_intersection(self, obj):
         obj_location = obj.get_location()
         ast_location = self.get_location()
-        distance = ((obj_location[0] - ast_location[0]) ** 2
-                    + (obj_location[1] - ast_location[1]) ** 2) ** 0.5
+        distance = ((obj_location[X_COORD] - ast_location[X_COORD]) ** 2
+                    + (obj_location[Y_COORD] - ast_location[
+                        Y_COORD]) ** 2) ** 0.5
 
         return distance <= self.get_radius() + obj.get_radius()
-
 
