@@ -89,6 +89,8 @@ class GameRunner:
             asteroid.move((self.screen_min_x, self.screen_min_y),
                           (self.screen_max_x, self.screen_max_y))
         self.check_input()
+        self.ship.move((self.screen_min_x, self.screen_min_y),
+                          (self.screen_max_x, self.screen_max_y))
         ship_location = self.ship.get_location()
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self.ship.get_heading())
