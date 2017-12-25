@@ -7,10 +7,11 @@ import sys
 DEFAULT_ASTEROIDS_NUM = 5
 MIN_SPEED = 1
 MAX_SPEED = 4
+SCORE_TABLE = [20, 50, 100]
+LEFT_ANGLE = 7
+RIGHT_ANGLE = -7
 
 class GameRunner:
-    LEFT_ANGLE = 7
-    RIGHT_ANGLE = -7
 
     def __init__(self, asteroids_amnt):
         self._screen = Screen()
@@ -21,6 +22,7 @@ class GameRunner:
         self.screen_min_y = Screen.SCREEN_MIN_Y
 
         self.ship = self.create_new_ship()
+        self.score = 0
         self.asteroids = []
         for i in range(asteroids_amnt):
             new_asteroid = self.create_new_asteroid()
@@ -51,9 +53,34 @@ class GameRunner:
             self._screen.draw_asteroid(asteroid, asteroid.get_location()[0],
                                        asteroid.get_location()[1])
 
-    def destroy_asteroid(self, asteroid):
+    def delete_asteroid(self, asteroid):
         self._screen.unregister_asteroid(asteroid)
         self.asteroids.remove(asteroid)
+
+    def destroy_asteroid(self, asteroid, torpedo):
+        ast_size = asteroid.get_size()
+        self.score += SCORE_TABLE[-ast_size]
+        self._screen.set_score(self.score)
+        self.delete_asteroid(asteroid)
+        if ast_size > 1:
+            torp_speed = torpedo.get_speed()
+            ast_speed = asteroid.get_speed()
+            new_speed_x = (torp_speed[0] + ast_speed[0]) / \
+                        (ast_speed[0] ** 2 + ast_speed[1] ** 2) ** 0.5
+            new_speed_y = (torp_speed[0] + ast_speed[0]) / \
+                        (ast_speed[0] ** 2 + ast_speed[1] ** 2) ** 0.5
+            self.create_smaller_asteroid(asteroid.get_location(),
+                                          (new_speed_x, new_speed_y),
+                                          ast_size - 1)
+            self.create_smaller_asteroid(asteroid.get_location(),
+                                         (-new_speed_x, -new_speed_y),
+                                         ast_size - 1)
+
+    def create_smaller_asteroid(self, location, speed, size):
+        new_asteroid = Asteroid(location, speed, size)
+        self.asteroids.append(new_asteroid)
+        self._screen.register_asteroid(new_asteroid, size)
+
 
     def run(self):
         self._do_loop()
@@ -61,14 +88,24 @@ class GameRunner:
 
     def check_input(self):
         if self._screen.is_left_pressed():
-            self.ship.change_heading(self.LEFT_ANGLE)
+            self.ship.change_heading(LEFT_ANGLE)
         if self._screen.is_right_pressed():
-            self.ship.change_heading(self.RIGHT_ANGLE)
+            self.ship.change_heading(RIGHT_ANGLE)
         if self._screen.is_up_pressed():
             self.ship.accelerate()
         if self._screen.is_space_pressed():
-            # TODO: Add torpedo launch here.
-            print('nothing for now')
+            self.ship.fire_torpedo(self._screen)
+
+    def move_torpedos(self, torpedo_list):
+        for torpedo in torpedo_list:
+            if torpedo.drop_lifespan():
+                self.ship.remove_torpedo(self._screen, torpedo)
+            else:
+                torpedo.move((self.screen_min_x, self.screen_min_y),
+                             (self.screen_max_x, self.screen_max_y))
+                self._screen.draw_torpedo(torpedo, torpedo.get_location()[0],
+                                          torpedo.get_location()[1],
+                                          torpedo.get_heading())
 
     def _do_loop(self):
         # You don't need to change this method!
@@ -83,18 +120,25 @@ class GameRunner:
         Your code goes here!
         '''
         for asteroid in self.asteroids:
+            for torpedo in self.ship.get_torpedoes():
+                if asteroid.has_intersection(torpedo):
+                    self.destroy_asteroid(asteroid, torpedo)
+                    self.ship.remove_torpedo(self._screen, torpedo)
+
             if asteroid.has_intersection(self.ship):
                 self.ship.lose_life(self._screen)
-                self.destroy_asteroid(asteroid)
+                self.delete_asteroid(asteroid)
             asteroid.move((self.screen_min_x, self.screen_min_y),
                           (self.screen_max_x, self.screen_max_y))
         self.check_input()
+        self.move_torpedos(self.ship.get_torpedoes())
         self.ship.move((self.screen_min_x, self.screen_min_y),
                           (self.screen_max_x, self.screen_max_y))
         ship_location = self.ship.get_location()
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self.ship.get_heading())
         self.draw_asteroids()
+
 
 def main(amnt):
     runner = GameRunner(amnt)

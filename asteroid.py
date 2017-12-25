@@ -27,3 +27,6 @@ class Asteroid(FlyingObject):
 
         return distance <= self.get_radius() + obj.get_radius()
 
+    def get_size(self):
+        return self.size
+

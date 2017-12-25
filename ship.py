@@ -55,23 +55,26 @@ class Ship(FlyingObject):
         return torpedo_speed_x, torpedo_speed_y
 
     def fire_torpedo(self, screen):
-        if len(self._torpedoes) >= MAX_TORPEDOES:
-            pass
-        else:
+        if len(self._torpedoes) < MAX_TORPEDOES:
             torpedo = Torpedo(self._location, self.calc_torpedo_speed(),
                               self._heading)
             self._torpedoes.append(torpedo)
             screen.register_torpedo(torpedo)
-
-    def remove_torpedo(self, screen, torpedo):
-        self._torpedoes.remove(torpedo)
-        screen.unregister_torpedo(torpedo)
 
     def get_torpedoes(self):
         return self._torpedoes
 
     def check_torpedoes(self, screen):
         for torpedo in self._torpedoes:
-            torpedo.drop_lifespan()
-            if torpedo.get_lifspan() == 0:
+            if torpedo.drop_lifespan():
                 self.remove_torpedo(screen, torpedo)
+            else:
+                torpedo.move((screen.screen_min_x, screen.screen_min_y),
+                             (screen.screen_max_x, screen.screen_max_y))
+                screen.draw_torpedo(torpedo, torpedo.get_location()[0],
+                                      torpedo.get_location()[1],
+                                      torpedo.get_heading())
+
+    def remove_torpedo(self, screen, torpedo):
+        self._torpedoes.remove(torpedo)
+        screen.unregister_torpedo(torpedo)

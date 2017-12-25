@@ -13,6 +13,13 @@ class Torpedo(FlyingObject):
 
     def drop_lifespan(self):
         self._lifespan_left -= 1
+        return self._lifespan_left == 0
 
     def get_lifspan(self):
         return self._lifespan_left
+
+    def get_heading(self):
+        return self._heading
+
+    def get_radius(self):
+        return self._radius

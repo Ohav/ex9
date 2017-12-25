@@ -20,3 +20,6 @@ class FlyingObject():
 
     def get_location(self):
         return self._location
+
+    def get_speed(self):
+        return self._speed
