@@ -48,11 +48,6 @@ class GameRunner:
                  random.randint(MIN_SPEED, MAX_SPEED))
         return Asteroid((x_location, y_location), speed)
 
-    def draw_asteroids(self):
-        for asteroid in self.asteroids:
-            self._screen.draw_asteroid(asteroid, asteroid.get_location()[0],
-                                       asteroid.get_location()[1])
-
     def delete_asteroid(self, asteroid):
         self._screen.unregister_asteroid(asteroid)
         self.asteroids.remove(asteroid)
@@ -70,8 +65,8 @@ class GameRunner:
             new_speed_y = (torp_speed[1] + ast_speed[1]) / \
                         (ast_speed[0] ** 2 + ast_speed[1] ** 2) ** 0.5
             self.create_smaller_asteroid(asteroid.get_location(),
-                                          (new_speed_x, new_speed_y),
-                                          ast_size - 1)
+                                         (new_speed_x, new_speed_y),
+                                         ast_size - 1)
             self.create_smaller_asteroid(asteroid.get_location(),
                                          (-new_speed_x, -new_speed_y),
                                          ast_size - 1)
@@ -98,6 +93,7 @@ class GameRunner:
 
     def move_torpedos(self, torpedo_list):
         for torpedo in torpedo_list:
+            # drop_lifespan() returns true if the torpedo is expired
             if torpedo.drop_lifespan():
                 self.ship.remove_torpedo(self._screen, torpedo)
             else:
@@ -106,6 +102,26 @@ class GameRunner:
                 self._screen.draw_torpedo(torpedo, torpedo.get_location()[0],
                                           torpedo.get_location()[1],
                                           torpedo.get_heading())
+
+    def check_asteroid_collision(self, asteroid):
+        """Checks and handles asteroid collisions with other objects.
+        If the asteroid survives, moves and draws it to the screen"""
+        for torpedo in self.ship.get_torpedoes():
+            if asteroid.has_intersection(torpedo):
+                self.destroy_asteroid(asteroid, torpedo)
+                self.ship.remove_torpedo(self._screen, torpedo)
+                return
+
+        if asteroid.has_intersection(self.ship):
+            self.ship.lose_life(self._screen)
+            self.delete_asteroid(asteroid)
+            return
+
+        # This part only happens if the asteroid survived.
+        asteroid.move((self.screen_min_x, self.screen_min_y),
+                      (self.screen_max_x, self.screen_max_y))
+        self._screen.draw_asteroid(asteroid, asteroid.get_location()[0],
+                                   asteroid.get_location()[1])
 
     def _do_loop(self):
         # You don't need to change this method!
@@ -116,29 +132,18 @@ class GameRunner:
         self._screen.ontimer(self._do_loop,5)
 
     def _game_loop(self):
-        '''
-        Your code goes here!
-        '''
+        """Iterates a single tick of the game.
+        Checks for collisions, handles user input and moves objects.
+        """
         for asteroid in self.asteroids:
-            for torpedo in self.ship.get_torpedoes():
-                if asteroid.has_intersection(torpedo):
-                    self.destroy_asteroid(asteroid, torpedo)
-                    self.ship.remove_torpedo(self._screen, torpedo)
-
-            if asteroid.has_intersection(self.ship):
-                self.ship.lose_life(self._screen)
-                self.delete_asteroid(asteroid)
-            asteroid.move((self.screen_min_x, self.screen_min_y),
-                          (self.screen_max_x, self.screen_max_y))
+            self.check_asteroid_collision(asteroid)
         self.check_input()
         self.move_torpedos(self.ship.get_torpedoes())
         self.ship.move((self.screen_min_x, self.screen_min_y),
-                          (self.screen_max_x, self.screen_max_y))
+                       (self.screen_max_x, self.screen_max_y))
         ship_location = self.ship.get_location()
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self.ship.get_heading())
-        self.draw_asteroids()
-
 
 def main(amnt):
     runner = GameRunner(amnt)
