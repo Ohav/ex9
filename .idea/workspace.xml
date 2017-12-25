@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e15186b1-b118-437f-b18d-728e3e304a54" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ex9.iml" afterPath="$PROJECT_DIR$/.idea/ex9.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asteroid.py" afterPath="$PROJECT_DIR$/asteroid.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asteroids_main.py" afterPath="$PROJECT_DIR$/asteroids_main.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flying_object.py" afterPath="$PROJECT_DIR$/flying_object.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ship.py" afterPath="$PROJECT_DIR$/ship.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/torpedo.py" afterPath="$PROJECT_DIR$/torpedo.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,8 +37,8 @@
       <file leaf-file-name="asteroids_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/asteroids_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state relative-caret-position="466">
+              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -191,6 +185,14 @@
       <option name="presentableId" value="Default" />
       <updated>1514137926045</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added asteroids splitting.&#10;Added score.&#10;Moved the torpedo check function to the GameRunner">
+      <created>1514206369528</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1514206369528</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -219,6 +221,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added asteroids splitting.&#10;Added score.&#10;Moved the torpedo check function to the GameRunner" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added asteroids splitting.&#10;Added score.&#10;Moved the torpedo check function to the GameRunner" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -349,8 +355,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/asteroids_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state relative-caret-position="466">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>

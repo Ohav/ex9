@@ -67,7 +67,7 @@ class GameRunner:
             ast_speed = asteroid.get_speed()
             new_speed_x = (torp_speed[0] + ast_speed[0]) / \
                         (ast_speed[0] ** 2 + ast_speed[1] ** 2) ** 0.5
-            new_speed_y = (torp_speed[0] + ast_speed[0]) / \
+            new_speed_y = (torp_speed[1] + ast_speed[1]) / \
                         (ast_speed[0] ** 2 + ast_speed[1] ** 2) ** 0.5
             self.create_smaller_asteroid(asteroid.get_location(),
                                           (new_speed_x, new_speed_y),
