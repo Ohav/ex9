@@ -89,8 +89,8 @@ class Ship(FlyingObject):
                 torpedo.move((screen.screen_min_x, screen.screen_min_y),
                              (screen.screen_max_x, screen.screen_max_y))
                 screen.draw_torpedo(torpedo, torpedo.get_location()[0],
-                                      torpedo.get_location()[1],
-                                      torpedo.get_heading())
+                                    torpedo.get_location()[1],
+                                    torpedo.get_heading())
 
     def remove_torpedo(self, screen, torpedo):
         """Removes a given torpedo from the ship's list of torpedoes."""

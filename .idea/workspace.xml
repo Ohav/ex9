@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e15186b1-b118-437f-b18d-728e3e304a54" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asteroid.py" afterPath="$PROJECT_DIR$/asteroid.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/asteroids_main.py" afterPath="$PROJECT_DIR$/asteroids_main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ship.py" afterPath="$PROJECT_DIR$/ship.py" />
     </list>
@@ -16,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ship.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ship.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ship.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+            <state relative-caret-position="21">
+              <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -36,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="asteroids_main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="asteroids_main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/asteroids_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="382">
+              <caret line="124" column="46" lean-forward="false" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -93,6 +92,7 @@
       <find>_lives</find>
       <find>screen</find>
       <find>score</find>
+      <find>asteroids</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -105,8 +105,8 @@
         <option value="$PROJECT_DIR$/torpedo.py" />
         <option value="$PROJECT_DIR$/flying_object.py" />
         <option value="$PROJECT_DIR$/asteroid.py" />
-        <option value="$PROJECT_DIR$/asteroids_main.py" />
         <option value="$PROJECT_DIR$/ship.py" />
+        <option value="$PROJECT_DIR$/asteroids_main.py" />
       </list>
     </option>
   </component>
@@ -180,9 +180,31 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="ship" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ex9" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ship.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <list size="2">
+      <item index="0" class="java.lang.String" itemvalue="Python.asteroids_main" />
+      <item index="1" class="java.lang.String" itemvalue="Python.ship" />
+    </list>
     <recent_temporary>
-      <list size="1">
+      <list size="2">
         <item index="0" class="java.lang.String" itemvalue="Python.asteroids_main" />
+        <item index="1" class="java.lang.String" itemvalue="Python.ship" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514209062579</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added docstrings to Ship&#10;Changed some properties in Asteroid to use protected (_)">
+      <created>1514285554453</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1514285554453</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -252,7 +281,8 @@
     <MESSAGE value="Added asteroids splitting.&#10;Added score.&#10;Moved the torpedo check function to the GameRunner" />
     <MESSAGE value="Fixed the speed of new asteroids." />
     <MESSAGE value="Added docstrings to most classes. &#10;Changed the way it calculates asteroid collisions and drawing, should be more efficient." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added docstrings to most classes. &#10;Changed the way it calculates asteroid collisions and drawing, should be more efficient." />
+    <MESSAGE value="Added docstrings to Ship&#10;Changed some properties in Asteroid to use protected (_)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added docstrings to Ship&#10;Changed some properties in Asteroid to use protected (_)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -362,13 +392,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/asteroids_main.py">
+    <entry file="file://$PROJECT_DIR$/torpedo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -380,19 +408,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/torpedo.py">
+    <entry file="file://$PROJECT_DIR$/ship.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="21">
+          <caret line="33" column="37" lean-forward="true" selection-start-line="33" selection-start-column="37" selection-end-line="33" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ship.py">
+    <entry file="file://$PROJECT_DIR$/asteroids_main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="382">
+          <caret line="124" column="46" lean-forward="false" selection-start-line="124" selection-start-column="46" selection-end-line="124" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
