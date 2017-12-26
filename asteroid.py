@@ -13,11 +13,11 @@ class Asteroid(FlyingObject):
         """Creates a new Asteroid object"""
         FlyingObject.__init__(self, location, speed)
 
-        self.size = max(min(size, MAX_SIZE), MIN_SIZE)
+        self._size = max(min(size, MAX_SIZE), MIN_SIZE)
 
         # An asteroids radius is calculated by this formula. The size of a
         # given asteroid shouldn't change, so we calculate once.
-        self._radius = SIZE_COEFFICIENT * self.size + NORMALIZER
+        self._radius = SIZE_COEFFICIENT * self._size + NORMALIZER
 
     def get_radius(self):
         """Returns the asteroid's radius"""
@@ -25,7 +25,7 @@ class Asteroid(FlyingObject):
 
     def get_size(self):
         """Returns the asteroid's size."""
-        return self.size
+        return self._size
 
     def has_intersection(self, obj):
         """Returns true if the asteroid is intersecting with the object.

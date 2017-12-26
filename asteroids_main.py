@@ -26,7 +26,7 @@ class GameRunner:
         self.asteroids = []
         for i in range(asteroids_amnt):
             new_asteroid = self.create_new_asteroid()
-            self._screen.register_asteroid(new_asteroid, new_asteroid.size)
+            self._screen.register_asteroid(new_asteroid, new_asteroid.get_size())
             self.asteroids.append(new_asteroid)
 
     def create_new_ship(self):
