@@ -11,7 +11,7 @@ Y_COORD = 1
 class Asteroid(FlyingObject):
     def __init__(self, location, speed, size=MAX_SIZE):
         """Creates a new Asteroid object"""
-        FlyingObject.__init__(self, location, speed)
+        super().__init__(location, speed)
 
         self._size = max(min(size, MAX_SIZE), MIN_SIZE)
 

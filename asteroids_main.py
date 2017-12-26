@@ -149,6 +149,8 @@ class GameRunner:
             if collision:
                 asteroid_collisions.add(collision)
         for collision in asteroid_collisions:
+            # It's impossible for an asteroid to hit more than one other object
+            # since we return on the first object found.
             if collision[1]:
                 self.destroy_asteroid(collision[0], collision[1])
             else:
