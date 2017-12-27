@@ -13,6 +13,7 @@ HIT_ASTEROID_MESSAGE = "You've hit an asteroid and lost 1 life!"
 A_CRY_OF_ENCOURAGEMENT = "Keep trying, the entire galaxy's fate depends on " \
                          "you!"
 TORPEDO_ACCELERATION_CONSTANT = 2
+NO_MORE_LIVES = 0
 
 
 class Ship(FlyingObject):
@@ -47,8 +48,13 @@ class Ship(FlyingObject):
     def lose_life(self, screen):
         """Lowers the ship's life total by one."""
         self._lives -= 1
+        if self._lives == NO_MORE_LIVES:
+            return True
         screen.remove_life()
         screen.show_message(HIT_ASTEROID_MESSAGE, A_CRY_OF_ENCOURAGEMENT)
+
+    def get_lives(self):
+        return self._lives
 
     def calc_torpedo_speed(self):
         """Calculates a new torpedo's speed, according to the ship's current

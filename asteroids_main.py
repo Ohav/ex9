@@ -10,6 +10,12 @@ MAX_SPEED = 4
 SCORE_TABLE = [100, 50, 20]
 LEFT_ANGLE = 7
 RIGHT_ANGLE = -7
+WIN_REASON = 1
+LOSE_REASON = 2
+QUIT_REASON = 3
+QUIT_TITLE = "You chose to quit the game"
+WIN_TITLE = "You win!"
+LOSE_TITLE = "You lose!"
 
 
 class GameRunner:
@@ -55,13 +61,14 @@ class GameRunner:
     def delete_asteroid(self, asteroid):
         self._screen.unregister_asteroid(asteroid)
         self._asteroids.remove(asteroid)
+        if not self._asteroids:
+            self.quit_game(self._screen, WIN_REASON)
 
     def destroy_asteroid(self, asteroid, torpedo):
         ast_size = asteroid.get_size()
         # TODO: COMMENT HERE
         self._score += SCORE_TABLE[ast_size - 1]
         self._screen.set_score(self._score)
-        self.delete_asteroid(asteroid)
         if ast_size > 1:
             torp_speed = torpedo.get_speed()
             ast_speed = asteroid.get_speed()
@@ -75,6 +82,7 @@ class GameRunner:
             self.create_smaller_asteroid(asteroid.get_location(),
                                          (-new_speed_x, -new_speed_y),
                                          ast_size - 1)
+        self.delete_asteroid(asteroid)
 
     def create_smaller_asteroid(self, location, speed, size):
         new_asteroid = Asteroid(location, speed, size)
@@ -95,6 +103,8 @@ class GameRunner:
             self._ship.accelerate()
         if self._screen.is_space_pressed():
             self._ship.fire_torpedo(self._screen)
+        if self._screen.should_end():
+            self.quit_game(self._screen, QUIT_REASON)
 
     def move_torpedos(self, torpedo_list):
         """Drops every torpedo's lifespan by 1, """
@@ -122,6 +132,8 @@ class GameRunner:
                 return asteroid, torpedo
 
         if asteroid.has_intersection(self._ship):
+            if self._ship.lose_life(self._screen):
+                self.quit_game(self._screen, LOSE_REASON)
             self._ship.lose_life(self._screen)
             return asteroid, None
 
@@ -163,6 +175,18 @@ class GameRunner:
         ship_location = self._ship.get_location()
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self._ship.get_heading())
+
+    def quit_game(self, screen, reason):
+        if reason == QUIT_REASON:
+            screen.show_message(QUIT_TITLE, "exiting the game")
+        if reason == WIN_REASON:
+            screen.show_message(WIN_TITLE, "Congratulations, you destroyed all "
+                                      "the asteroids and saved the galaxy!")
+        if reason == LOSE_REASON:
+            screen.show_message(LOSE_TITLE, "You've ran out of lives")
+        screen.end_game()
+        sys.exit()
+
 
 
 def main(amnt):
