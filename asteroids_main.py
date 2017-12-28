@@ -176,15 +176,15 @@ class GameRunner:
         self._screen.draw_ship(ship_location[0], ship_location[1],
                                self._ship.get_heading())
 
-    def quit_game(self, screen, reason):
+    def quit_game(self, reason):
         if reason == QUIT_REASON:
-            screen.show_message(QUIT_TITLE, "exiting the game")
+            self._screen.show_message(QUIT_TITLE, "exiting the game")
         if reason == WIN_REASON:
-            screen.show_message(WIN_TITLE, "Congratulations, you destroyed all "
+            self._screen.show_message(WIN_TITLE, "Congratulations, you destroyed all "
                                       "the asteroids and saved the galaxy!")
         if reason == LOSE_REASON:
-            screen.show_message(LOSE_TITLE, "You've ran out of lives")
-        screen.end_game()
+            self._screen.show_message(LOSE_TITLE, "You've ran out of lives")
+        self._screen.end_game()
         sys.exit()
 
 
